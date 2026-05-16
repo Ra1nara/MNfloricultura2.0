@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+:root{
+    --background: #f7f3eb;
+    --green: #465c46;
+    --text: #686357;
+    --gold: #c5886c;
+    --white: #ffffff;
+    --card: #fcfaf4;
+    --border: #e7e3da;
+
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 4rem;
+
+    --radius: 20px;
+}
+
+body{
+    background-color: var(--background);
+    padding: 1.2rem;
+    font-family: 'Inter', sans-serif;
+}
+
+img{
+    display: block;
+    max-width: 100%;
+}
+
+button{
+    border: none;
+    cursor: pointer;
+}
+
+.divisordourado{
+    width: 140px;
+    margin: 1rem 0;
+}
