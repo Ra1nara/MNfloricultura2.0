@@ -22,11 +22,29 @@ categoryButtons.forEach(button => {
                 return
             }
 
-            if(cardCategory === category){
-                card.style.display = 'block'
-            } else {
-                card.style.display = 'none'
-            }
+            if(category === 'todos' || cardCategory === category){
+
+    card.style.opacity = '0'
+
+    setTimeout(() => {
+
+        card.style.display = 'block'
+
+        setTimeout(() => {
+            card.style.opacity = '1'
+        }, 50)
+
+    }, 200)
+
+} else {
+
+    card.style.opacity = '0'
+
+    setTimeout(() => {
+        card.style.display = 'none'
+    }, 200)
+
+}
 
         })
 
@@ -68,9 +86,13 @@ const observer = new IntersectionObserver(entries => {
     })
 
 }, {
-    threshold: 0.2
+    threshold: 0.12
 })
 
-productCards.forEach(card => {
+productCards.forEach((card, index) => {
+
+    card.style.transitionDelay = `${index * 0.08}s`
+
     observer.observe(card)
+
 })
