@@ -198,32 +198,33 @@ align-items: center;
 }
 
 #corporativo{
-    padding: 4rem 0;
+    padding: 2rem 0 3rem;
     text-align: center;
 }
 
 .corporate-grid{
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.2rem;
     margin-top: 3rem;
 }
 
 .corporate-card{
     background-color: var(--card);
     border-radius: var(--radius);
-    padding: 2rem;
+    padding: 1.5rem;
     transition: 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.04);
 }
 
 .corporate-card:hover{
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
 .corporate-card h3{
     color: var(--green);
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     margin-bottom: 1rem;
     font-family: Georgia, serif;
 }
@@ -236,7 +237,7 @@ align-items: center;
 
 .corporate-card h2{
     color: var(--gold);
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .destaque{
@@ -419,6 +420,9 @@ footer span{
 
     .product-grid{
         grid-template-columns: repeat(2, 1fr);
+    }
+    .corporate-grid{
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
