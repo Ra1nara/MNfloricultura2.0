@@ -49,8 +49,8 @@ button{
 }
 
 .divisordourado{
-    width: 140px;
-    margin: 1rem 0;
+    width: 100px;
+    margin: 0 auto;
 }
 
 ::selection{
