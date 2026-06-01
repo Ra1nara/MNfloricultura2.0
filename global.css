@@ -9,10 +9,10 @@ html{
 }
 
 :root{
-    --background: #f5f1ea;
-    --green: #314d3d;
-    --text: #686357;
-    --gold: #b67a5b;
+    --background: #fef3f2;
+    --green: #7b1d2b;
+    --text: #836667;
+    --gold: #e57386;
     --white: #ffffff;
     --card: #fcfaf4;
     --border: #e7e3da;
@@ -27,7 +27,7 @@ html{
 
 body{
     background:
-        radial-gradient(circle at top, #ffffff 0%, var(--background) 70%);
+        radial-gradient(circle at top, #fef3f2 0%, var(--background) 70%);
 
     padding: 1.2rem;
 
@@ -36,6 +36,12 @@ body{
     color: var(--text);
 
     overflow-x: hidden;
+}
+h1,h2,h3{
+    font-family: 'Georgia', serif;
+}
+.card{
+    padding: 2rem;
 }
 
 img{
@@ -49,7 +55,8 @@ button{
 }
 
 .divisordourado{
-    width: 100px;
+    object-fit: cover;
+    width: 70px;
     margin: 0 auto;
 }
 
