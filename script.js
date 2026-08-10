@@ -1,98 +1,183 @@
-const categoryButtons = document.querySelectorAll('.categorias button')
-const productCards = document.querySelectorAll('.product-card')
 
-categoryButtons.forEach(button => {
+document.addEventListener("DOMContentLoaded", () => {
 
-    button.addEventListener('click', () => {
+    /* =========================================
+       ELEMENTOS
+    ========================================= */
 
-        const category = button.dataset.category
+    const categoryButtons =
+        document.querySelectorAll(".categorias button");
 
-        categoryButtons.forEach(btn => {
-            btn.classList.remove('active-category')
-        })
+    const productCards =
+        document.querySelectorAll(".product-card");
 
-        button.classList.add('active-category')
+    const orderButtons =
+        document.querySelectorAll(".order-button");
 
-        productCards.forEach(card => {
 
-            const cardCategory = card.dataset.category
+    /* =========================================
+       FILTRO DE PRODUTOS
+    ========================================= */
 
-            if(category === 'todos'){
-                card.style.display = 'block'
-                return
+    categoryButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const selectedCategory =
+                button.dataset.category;
+
+
+            /* Atualiza botão ativo */
+
+            categoryButtons.forEach(btn => {
+                btn.classList.remove("active-category");
+            });
+
+            button.classList.add("active-category");
+
+
+            /* Filtra produtos */
+
+            productCards.forEach(card => {
+
+                const cardCategory =
+                    card.dataset.category;
+
+                const shouldShow =
+                    selectedCategory === "todos" ||
+                    cardCategory === selectedCategory;
+
+
+                if (shouldShow) {
+
+                    card.style.display = "block";
+
+                    requestAnimationFrame(() => {
+                        card.classList.add("show-card");
+                    });
+
+                } else {
+
+                    card.classList.remove("show-card");
+
+                    setTimeout(() => {
+
+                        if (!card.classList.contains("show-card")) {
+                            card.style.display = "none";
+                        }
+
+                    }, 300);
+
+                }
+
+            });
+
+        });
+
+    });
+
+
+    /* =========================================
+       PEDIDOS PELO WHATSAPP
+    ========================================= */
+
+    orderButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const card =
+                button.closest(".product-card");
+
+            if (!card) return;
+
+
+            const productName =
+                card.querySelector("h3")?.textContent.trim();
+
+
+            if (!productName) return;
+
+
+            const phone =
+                "5573991996701";
+
+
+            const message =
+                `Olá! Tenho interesse no produto "${productName}". 🌷`;
+
+
+            const whatsappURL =
+                `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+
+            window.open(
+                whatsappURL,
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+        });
+
+    });
+
+
+    /* =========================================
+       ANIMAÇÃO DOS CARDS
+    ========================================= */
+
+    const observer =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+
+                    entry.target.classList.add(
+                        "show-card"
+                    );
+
+
+                    observer.unobserve(
+                        entry.target
+                    );
+
+                });
+
+            },
+            {
+                threshold: 0.12
             }
+        );
 
-            if(category === 'todos' || cardCategory === category){
 
-    card.style.opacity = '0'
+    productCards.forEach((card, index) => {
 
-    setTimeout(() => {
+        card.style.transitionDelay =
+            `${index * 0.06}s`;
 
-        card.style.display = 'block'
 
-        setTimeout(() => {
-            card.style.opacity = '1'
-        }, 50)
+        observer.observe(card);
 
-    }, 200)
+    });
 
-} else {
 
-    card.style.opacity = '0'
+    /* =========================================
+       ACESSIBILIDADE DOS LINKS EXTERNOS
+    ========================================= */
 
-    setTimeout(() => {
-        card.style.display = 'none'
-    }, 200)
+    document
+        .querySelectorAll('a[target="_blank"]')
+        .forEach(link => {
 
-}
+            link.setAttribute(
+                "rel",
+                "noopener noreferrer"
+            );
 
-        })
+        });
 
-    })
-
-})
-
-const orderButtons = document.querySelectorAll('.price-content button')
-
-orderButtons.forEach(button => {
-
-    button.addEventListener('click', () => {
-
-        const card = button.closest('.product-card')
-
-        const productName = card.querySelector('h3').textContent
-
-        const message = `Olá! Tenho interesse no produto: ${productName} 🌸`
-
-        const phone = '5573991996701'
-
-        const whatsappURL = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
-
-        window.open(whatsappURL, '_blank')
-
-    })
-
-})
-
-const observer = new IntersectionObserver(entries => {
-
-    entries.forEach(entry => {
-
-       if(entry.isIntersecting){
-    entry.target.classList.add('show-card')
-    observer.unobserve(entry.target)
-}
-
-    })
-
-}, {
-    threshold: 0.12
-})
-
-productCards.forEach((card, index) => {
-
-    card.style.transitionDelay = `${index * 0.08}s`
-
-    observer.observe(card)
-
-})
+});

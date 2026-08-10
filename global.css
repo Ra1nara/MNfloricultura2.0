@@ -1,73 +1,119 @@
-*{
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html{
+html {
     scroll-behavior: smooth;
 }
 
-:root{
+:root {
+    /* Cores */
     --background: #fef3f2;
     --green: #7b1d2b;
+    --green-dark: #5f1622;
     --text: #836667;
     --gold: #e57386;
+    --gold-light: #f6d6da;
     --white: #ffffff;
-    --card: #fcfaf4;
-    --border: #e7e3da;
+    --card: #fffdf9;
+    --border: #eadfe0;
 
-    --spacing-sm: 0.5rem;
+    /* Espaçamentos */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 0.75rem;
     --spacing-md: 1rem;
     --spacing-lg: 2rem;
     --spacing-xl: 4rem;
+    --spacing-xxl: 7rem;
 
+    /* Bordas */
+    --radius-sm: 12px;
     --radius: 20px;
+    --radius-lg: 28px;
+    --radius-pill: 999px;
+
+    /* Sombras */
+    --shadow-sm: 0 8px 25px rgba(123, 29, 43, 0.06);
+    --shadow-md: 0 15px 40px rgba(123, 29, 43, 0.10);
+    --shadow-lg: 0 25px 60px rgba(123, 29, 43, 0.14);
+
+    /* Transições */
+    --transition: 0.3s ease;
 }
 
-body{
+body {
+    min-height: 100vh;
+
     background:
-        radial-gradient(circle at top, #fef3f2 0%, var(--background) 70%);
+        radial-gradient(
+            circle at top,
+            #fff8f7 0%,
+            var(--background) 65%
+        );
 
     padding: 1.2rem;
 
-    font-family: 'Inter', sans-serif;
-
+    font-family: "Inter", sans-serif;
     color: var(--text);
 
     overflow-x: hidden;
 }
-h1,h2,h3{
-    font-family: 'Georgia', serif;
-}
-.card{
-    padding: 2rem;
+
+body::selection {
+    background-color: var(--gold);
+    color: var(--white);
 }
 
-img{
+h1,
+h2,
+h3 {
+    font-family: Georgia, serif;
+}
+
+img {
     display: block;
     max-width: 100%;
 }
 
-button{
+button {
     border: none;
     cursor: pointer;
+    font-family: inherit;
 }
 
-.divisordourado{
-    object-fit: cover;
+a {
+    color: inherit;
+}
+
+section {
+    scroll-margin-top: 2rem;
+}
+
+.divisordourado {
     width: 70px;
-    margin: 0 auto;
+    height: auto;
+    margin: 1rem auto;
 }
 
-.floating-whatsapp{
+/* =========================================
+   WHATSAPP FLUTUANTE
+========================================= */
+
+.floating-whatsapp {
     position: fixed;
 
-    bottom: 20px;
-    right: 20px;
+    right: 22px;
+    bottom: 22px;
 
-    width: 65px;
-    height: 65px;
+    width: 58px;
+    height: 58px;
 
     background: #25d366;
 
@@ -79,11 +125,67 @@ button{
 
     z-index: 999;
 
-    box-shadow: 0 10px 30px rgba(37,211,102,0.35);
+    box-shadow:
+        0 10px 30px rgba(37, 211, 102, 0.30);
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition);
 }
 
-::selection{
-    background-color: var(--gold);
-    color: white;
+.floating-whatsapp img {
+    width: 28px;
+    height: 28px;
 }
 
+.floating-whatsapp:hover {
+    transform: translateY(-5px) scale(1.05);
+
+    box-shadow:
+        0 15px 35px rgba(37, 211, 102, 0.40);
+}
+
+.floating-whatsapp:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 4px;
+}
+
+/* =========================================
+   ACESSIBILIDADE
+========================================= */
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+}
+
+/* =========================================
+   RESPONSIVIDADE GLOBAL
+========================================= */
+
+@media (min-width: 768px) {
+    body {
+        padding: 2rem 6%;
+    }
+}
+
+@media (min-width: 1200px) {
+    body {
+        padding: 2rem 8%;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 1rem;
+    }
+
+    .floating-whatsapp {
+        right: 16px;
+        bottom: 16px;
+
+        width: 54px;
+        height: 54px;
+    }
+}
